@@ -28,8 +28,8 @@ An API route that securely exchanges the authorization code for an access token 
    ```
    NEXT_PUBLIC_GUMROAD_APP_CLIENT_ID=your_client_id
    NEXT_PUBLIC_GUMROAD_APP_REDIRECT_URI=your_redirect_uri
-   GUMROAD_CLIENT_ID=your_client_id
-   GUMROAD_CLIENT_SECRET=your_client_secret
+   GUMROAD_APP_CLIENT_ID=your_client_id
+   GUMROAD_APP_CLIENT_SECRET=your_client_secret
    GUMROAD_APP_REDIRECT_URI=your_redirect_uri
    ```
    Replace `your_client_id`, `your_client_secret`, and `your_redirect_uri` with the values from your Gumroad application
