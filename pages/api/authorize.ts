@@ -22,8 +22,8 @@ export default async function handler(
       return res.status(400).json({ error: 'Authorization code is missing' })
     }
 
-    const clientId = process.env.GUMROAD_CLIENT_ID
-    const clientSecret = process.env.GUMROAD_CLIENT_SECRET
+    const clientId = process.env.GUMROAD_APP_CLIENT_ID
+    const clientSecret = process.env.GUMROAD_APP_CLIENT_SECRET
     const redirectUri = process.env.GUMROAD_APP_REDIRECT_URI
 
     if (!clientId || !clientSecret) {
