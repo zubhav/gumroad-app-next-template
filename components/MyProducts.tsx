@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import useLocalStorage from '@/hooks/useLocalStorage';
 import {useRouter} from 'next/router';
-import {ProductResponse} from '@web-ninja/gumroad-node-sdk/lib/entities/products';
 
 interface Product {
   id: string;
@@ -11,12 +10,10 @@ interface Product {
 }
 
 export function MyProducts() {
-    const [products, setProducts] = useState<ProductResponse["product"][]>([]);
+    const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [accessToken] = useLocalStorage<string | null>('accessToken', null);
-
-    const router = useRouter();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -62,7 +59,6 @@ export function MyProducts() {
 
             <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={() => {
                 localStorage.removeItem('accessToken');
-                router.reload();
             }}>
                 Sign out
             </button>
