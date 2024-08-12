@@ -8,7 +8,7 @@ export default function Home() {
   const [accessToken] = useLocalStorage<string | null>('accessToken', null);
 
   return (
-    <main className="h-screen bg-white flex items-center justify-center">
+    <main className="h-screen bg-black flex items-center justify-center">
       {!accessToken ? (
         <SignIn />
       ) : (
