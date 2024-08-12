@@ -48,14 +48,18 @@ export function MyProducts() {
 
     return (
         <div>
-            <h1>Your Products</h1>
-            <ul>
-                {products.map((product) => (
-                    <li key={product.id}>
-                        {product.name}
-                    </li>
-                ))}
-            </ul>
+            <h1>My Products</h1>
+            {products.length > 0 ? (
+                <ul>
+                    {products.map((product) => (
+                        <li key={product.id}>
+                            {product.name}
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>No products found.</p>
+            )}
 
             <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={() => {
                 localStorage.removeItem('accessToken');
