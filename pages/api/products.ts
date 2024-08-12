@@ -19,10 +19,10 @@ export default async function handler(
     const gumroadClient = new GumroadApiClient(accessToken);
     const productsResponse = await gumroadClient.getProducts();
 
-    if (productsResponse.data.success) {
-      return res.status(200).json(productsResponse.data);
+    if (productsResponse.success) {
+      return res.status(200).json(productsResponse);
     } else {
-      return res.status(productsResponse.status).json({ error: "Could not fetch products" });
+      return res.status(500).json({ error: "Could not fetch products" });
     }
   } catch (error) {
     console.error('Error fetching products:', error);

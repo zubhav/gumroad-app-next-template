@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import useLocalStorage from '@/hooks/useLocalStorage';
+import {useRouter} from 'next/router';
+import {ProductResponse} from '@web-ninja/gumroad-node-sdk/lib/entities/products';
 
 interface Product {
   id: string;
@@ -8,11 +10,13 @@ interface Product {
   price: number;
 }
 
-export function ProductList() {
-    const [products, setProducts] = useState<Product[]>([]);
+export function MyProducts() {
+    const [products, setProducts] = useState<ProductResponse["product"][]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [accessToken] = useLocalStorage<string | null>('accessToken', null);
+
+    const router = useRouter();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -27,7 +31,7 @@ export function ProductList() {
                     throw new Error('Failed to fetch products');
                 }
 
-                const data = await response.json() as {products: Product[]};
+                const data = await response.json();
                 setProducts(data.products);
             } catch (err) {
                 setError('Error fetching products');
@@ -48,13 +52,20 @@ export function ProductList() {
     return (
         <div>
             <h1>Your Products</h1>
-            {products.map((product) => (
-                <div key={product.id}>
-                    <h2>{product.name}</h2>
-                    <p>{product.description}</p>
-                    <p>Price: ${product.price}</p>
-                </div>
-            ))}
+            <ul>
+                {products.map((product) => (
+                    <li key={product.id}>
+                        {product.name}
+                    </li>
+                ))}
+            </ul>
+
+            <button className="bg-red-500 text-white px-4 py-2 rounded-md" onClick={() => {
+                localStorage.removeItem('accessToken');
+                router.reload();
+            }}>
+                Sign out
+            </button>
         </div>
     );
 }

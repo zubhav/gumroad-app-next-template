@@ -1,18 +1,18 @@
 'use client';
 
-import {ProductList} from "@/components/ProductList";
-import {SignInButton} from "@/components/SignInButton";
+import {MyProducts} from "@/components/MyProducts";
+import {SignIn} from "@/components/SignIn";
 import useLocalStorage from "@/hooks/useLocalStorage";
 
 export default function Home() {
   const [accessToken] = useLocalStorage<string | null>('accessToken', null);
 
   return (
-    <main>
+    <main className="h-screen bg-white flex items-center justify-center">
       {!accessToken ? (
-        <SignInButton />
+        <SignIn />
       ) : (
-        <ProductList />
+        <MyProducts />
       )}
     </main>
   );
